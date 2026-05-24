@@ -1,0 +1,31 @@
+services:
+  localstack:
+    container_name: ${LOCALSTACK_DOCKER_NAME:-localstack-tp7b}
+    image: localstack/localstack:latest
+    ports:
+      - "127.0.0.1:4566:4566"
+      - "127.0.0.1:4510-4559:4510-4559"
+    environment:
+      - LOCALSTACK_AUTH_TOKEN=${LOCALSTACK_AUTH_TOKEN:?LOCALSTACK_AUTH_TOKEN is required}
+      - DEBUG=${DEBUG:-0}
+      - PERSISTENCE=${PERSISTENCE:-1}
+      - LAMBDA_EXECUTOR=docker
+    volumes:
+      - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+
+  tools:
+    build:
+      context: .
+      dockerfile: Dockerfile.tools
+    working_dir: /workspace
+    environment:
+      - LOCALSTACK_ENDPOINT=http://localstack:4566
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_DEFAULT_REGION=us-east-1
+    volumes:
+      - ./:/workspace
+    depends_on:
+      - localstack
+    command: ["sleep", "infinity"]

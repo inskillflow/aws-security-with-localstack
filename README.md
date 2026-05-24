@@ -1,5 +1,3 @@
-<a id="top"></a>
-
 # Cours — Sécurité AWS avec LocalStack
 
 > **Public visé :** étudiants débutants à intermédiaires en sécurité cloud, qui veulent comprendre les contrôles de sécurité AWS sans payer un compte AWS.
@@ -303,5 +301,6 @@ docker compose down -v
 *Fin du README — bonne pratique de la sécurité AWS dans LocalStack.*
 
 <p align="right"><a href="#top">↑ Retour en haut</a></p>
-#   a w s - s e c u r i t y - w i t h - l o c a l s t a c k  
+#   a w s - s e c u r i t y - w i t h - l o c a l s t a c k 
+ 
  

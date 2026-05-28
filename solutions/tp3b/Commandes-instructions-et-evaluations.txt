@@ -1,0 +1,105 @@
+--------------------------
+- Étapes
+--------------------------
+
+- Prérequis : Avoir Docker Desktop
+https://medium.com/@rhoumahaythem/partie-1-20-installation-de-docker-sur-windows-04c50d410e7a
+
+- Allez au dépôt du projet : 
+https://github.com/inskillflow/terraform-aws-security-with-localstack-v1/tree/main/solutions/tp3b
+
+
+==> Étape 1 - Créez la structure de votre projet : 
+
+DEMO-TERRAFORM-AWS-IAM/
+│
+├── terraform/
+│   │
+│   ├── .terraform/
+│   │
+│   ├── .terraform.lock.hcl
+│   ├── main.tf
+│   ├── outputs.tf
+│   ├── provider.tf
+│   ├── terraform.tfstate
+│   └── variables.tf
+├── .env
+├── docker-compose.yml
+└── Dockerfile.tools
+
+
+- Vous pouvez soit (1) cloner le projet , soit (2) télécharger fichier par fichier 
+soit (3) copier coller en respectant les indendations. 
+
+
+
+
+
+==> Étape 2 - Renommer le fichier .env.exemple à seulement .env
+
+
+
+
+==> Étape 3 - Créez un compte sur localstack (https://www.localstack.cloud/)
+
+- Allez ici : https://www.localstack.cloud/
+- Créez un compte
+- Copiez la valeur du jeton et collez la dans le fichier .env 
+ici ==>  LOCALSTACK_AUTH_TOKEN=ls-xxxxxxxxxxxxxxxxxxx 
+
+
+
+
+==> Étape 4 - Analysez d'une façon sommaire les deux fichier Dockerfile.tools et docker-compose 
+
+-> Question 1:  À quoi servent ces deux fichiers ? 
+-> Question 2:  Quelle est la différence entre une image et un conteneur ?
+
+
+
+
+==> Étape 5 - Exécution des commandes :
+
+
+
+Commande # 1 : docker compose build
+Commande # 2 : docker compose up -d localstack tools
+
+-> Question 3: Expliquez les commandes 1 et 2.
+
+Commande # 3 : docker compose run --rm tools terraform -chdir=terraform init
+Commande # 4 : docker compose run --rm tools terraform -chdir=terraform plan
+Commande # 5 : docker compose run --rm tools terraform -chdir=terraform apply -auto-approve
+
+-> Question 4: Expliquez les commandes 3, 4 et 5.
+
+
+Commande # 6 : docker compose run --rm tools aws --endpoint-url=http://localstack:4566 iam list-users
+Commande # 7 : docker compose run --rm tools aws --endpoint-url=http://localstack:4566 iam list-groups
+Commande # 8 : docker compose run --rm tools aws --endpoint-url=http://localstack:4566 iam list-policies --scope Local
+Commande # 9 : docker compose run --rm tools aws --endpoint-url=http://localstack:4566 iam list-roles
+
+-> Question 5: Expliquez les commandes 6, 7, 8 et 9.
+-> Question 6: Interprêtez les résultats observés. 
+
+Commande # 10 : docker compose run --rm tools terraform -chdir=terraform destroy -auto-approve
+Commande # 11 : docker compose down -v
+
+-> Question 7: Expliquez les commandes 10 et 11.
+
+
+-> Question 8:  À quoi sert localstack ?
+-> Question 9:  À quoi sert Docker ?
+-> Question 10: Expliquez la différence entre un Dockerfile et docker-compose ?
+-> Question 11: À quoi sert Terraform ?
+-> Question 12: Expliquez les commandes suivantes :
+
+terraform init
+terraform plan
+terraform apply -auto-approve
+terraform destroy -auto-approve
+
+iam list-users
+iam list-groups
+iam list-policies
+iam list-roles
